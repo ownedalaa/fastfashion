@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sections = [
+  {
+    id: 'intro',
+    title: 'The Hidden Cost of Fast Fashion',
+    image: 'https://images.unsplash.com/photo-1581873372796-635b67ca2008?q=80&w=1000&auto=format&fit=crop',
+    content: ''
+  },
+  {
+    id: 'what-is',
+    title: 'What is Fast Fashion?',
+    image: 'https://images.unsplash.com/photo-1604187351574-c75ca79f5807?q=80&w=1000&auto=format&fit=crop',
+    content: 'Fast fashion has revolutionized how we consume clothing, offering trendy styles at unprecedented low prices. This business model, pioneered by retailers like H&M, Zara, and SHEIN, relies on rapid production cycles that transform runway designs into store merchandise in as little as two weeks. While providing affordable fashion access to millions, this system has created a global phenomenon where clothing is increasingly treated as disposable, with the average garment now worn just seven times before being discarded.'
+  },
+  {
+    id: 'impact',
+    title: 'Environmental & Social Impact',
+    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1000&auto=format&fit=crop',
+    content: 'The consequences of our clothing consumption extend far beyond our closets. Environmentally, the fashion industry is responsible for 10% of global carbon emissions and is the second-largest consumer of water worldwide, with a single cotton t-shirt requiring 3,000 liters to produce. In manufacturing countries, textile dyeing pollutes waterways with toxic chemicals, while mountains of discarded clothing overwhelm landfills in Chile and Ghana. Socially, the industry\'s pursuit of low costs comes at the expense of approximately 40 million garment workers worldwide, many earning as little as 33 cents per hour in unsafe conditions, as tragically highlighted by the 2013 Rana Plaza factory collapse that killed over 1,100 people.'
+  },
+  {
+    id: 'alternatives',
+    title: 'Sustainable Alternatives',
+    image: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=1000&auto=format&fit=crop',
+    content: 'Fortunately, a growing movement toward sustainable fashion offers promising alternatives. The slow fashion approach emphasizes quality over quantity, with brands like Patagonia and Everlane providing transparency about their supply chains and production methods. Circular fashion solutions—including secondhand shopping, clothing rental services, and repair initiatives—extend the life of existing garments while reducing waste. As consumers, our choices matter; by investing in fewer, better-quality pieces, researching brand practices, and caring properly for our clothes, we can help transform an industry that has significant impacts on both people and the planet.'
+  }
+];
+
+const actions = [
+  {
+    title: 'Buy Less, Choose Well',
+    description: 'Invest in quality pieces that will last longer and transcend seasonal trends'
+  },
+  {
+    title: 'Shop Secondhand',
+    description: 'Extend the life of existing garments by shopping at thrift stores or online resale platforms'
+  },
+  {
+    title: 'Research Brands',
+    description: 'Support companies committed to ethical production and environmental sustainability'
+  }
+];
+---
+
+<Layout title="The Hidden Cost of Fast Fashion">
+  <nav class="fixed w-full bg-white/80 backdrop-blur-sm shadow-sm z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <a href="#" class="text-xl font-bold text-gray-800">Fast Fashion Impact</a>
+        <div class="hidden md:flex space-x-6">
+          {sections.map(section => (
+            <a href={`#${section.id}`} class="text-gray-600 hover:text-gray-900 transition-colors">
+              {section.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    {sections.map((section, index) => (
+      <section 
+        id={section.id} 
+        class={`min-h-screen flex items-center ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}
+      >
+        <div class="container mx-auto px-4 py-24">
+          <div class={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
+            <div 
+              class="space-y-6"
+              data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+            >
+              <h2 class="text-4xl font-bold text-gray-900">{section.title}</h2>
+              <p class="text-lg text-gray-700 leading-relaxed">{section.content}</p>
+              {section.id === 'alternatives' && (
+                <div class="mt-12 grid gap-6">
+                  {actions.map(action => (
+                    <div 
+                      class="bg-white p-6 rounded-lg shadow-md"
+                      data-aos="fade-up"
+                      data-aos-delay="200"
+                    >
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2">{action.title}</h3>
+                      <p class="text-gray-700">{action.description}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div 
+              class="relative h-[400px] rounded-xl overflow-hidden shadow-xl"
+              data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}
+            >
+              <img 
+                src={section.image} 
+                alt={section.title}
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+  </main>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-400">
+        Learn more about sustainable fashion and make informed choices for a better future.
+      </p>
+    </div>
+  </footer>
+</Layout>
